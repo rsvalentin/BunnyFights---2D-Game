@@ -1,6 +1,7 @@
 package BunnyFights;
 
 import BunnyFights.Display.Display;
+import BunnyFights.Input.KeyManager;
 import BunnyFights.States.GameState;
 import BunnyFights.States.MenuState;
 import BunnyFights.States.State;
@@ -11,6 +12,7 @@ import BunnyFights.gfx.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.security.Key;
 
 public class Game implements Runnable {
 
@@ -27,14 +29,19 @@ public class Game implements Runnable {
     private State gameState;
     private State menuState;
 
+    // Input
+    private KeyManager ketManager;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        ketManager = new KeyManager();
     }
     public void init() {
 
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(ketManager);
         Assets.init();
 
         gameState = new GameState(this);
@@ -46,6 +53,7 @@ public class Game implements Runnable {
 
 
     public void tick() {
+        ketManager.tick();
         if (State.getState() != null) {
             State.getState().tick();
         }
@@ -93,6 +101,9 @@ public class Game implements Runnable {
         stop();
     }
 
+    public KeyManager getKetManager() {
+        return ketManager;
+    }
     public synchronized void start() {
         if (running)
             return;

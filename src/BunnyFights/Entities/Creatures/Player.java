@@ -1,17 +1,32 @@
 package BunnyFights.Entities.Creatures;
 
+import BunnyFights.Game;
 import BunnyFights.gfx.Assets;
 
 import java.awt.*;
 
 public class Player extends Creature {
 
-    public Player(float x, float y) {
+    private Game game;
+    public Player(Game game, float x, float y) {
         super(x, y);
+        this.game = game;
     }
 
     @Override
     public void tick() {
+        if (game.getKetManager().up) {
+            y -= 3;
+        }
+        if (game.getKetManager().down) {
+            y += 3;
+        }
+        if (game.getKetManager().left) {
+            x -= 3;
+        }
+        if (game.getKetManager().right) {
+            x += 3;
+        }
 
     }
 
