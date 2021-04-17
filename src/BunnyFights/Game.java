@@ -1,6 +1,8 @@
 package BunnyFights;
 
 import BunnyFights.Display.Display;
+import BunnyFights.States.GameState;
+import BunnyFights.States.State;
 import BunnyFights.gfx.Assets;
 import BunnyFights.gfx.ImageLoader;
 import BunnyFights.gfx.SpriteSheet;
@@ -19,7 +21,9 @@ public class Game implements Runnable {
     private boolean running = false;
     private BufferStrategy bs;
     private Graphics g;
-    int x=0;
+
+    // States
+    private State gameState;
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -30,12 +34,17 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
 
+        gameState = new GameState();
+        State.setState(gameState);
+
 
     }
 
 
     public void tick() {
-        x += 1;
+        if (State.getState() != null) {
+            State.getState().tick();
+        }
     }
 
 
@@ -48,7 +57,9 @@ public class Game implements Runnable {
         g = bs.getDrawGraphics();
         g.clearRect(0,0,width,height);
 
-        g.drawImage(Assets.heroLeft,x,0,null);
+        if (State.getState() != null) {
+            State.getState().render(g);
+        }
 
         bs.show();
         g.dispose();
