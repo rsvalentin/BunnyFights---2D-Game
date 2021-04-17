@@ -2,6 +2,7 @@ package BunnyFights;
 
 import BunnyFights.Display.Display;
 import BunnyFights.States.GameState;
+import BunnyFights.States.MenuState;
 import BunnyFights.States.State;
 import BunnyFights.gfx.Assets;
 import BunnyFights.gfx.ImageLoader;
@@ -24,6 +25,8 @@ public class Game implements Runnable {
 
     // States
     private State gameState;
+    private State menuState;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -34,7 +37,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
 
-        gameState = new GameState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
         State.setState(gameState);
 
 
