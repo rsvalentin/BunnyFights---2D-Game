@@ -19,7 +19,7 @@ public class Game implements Runnable {
     private boolean running = false;
     private BufferStrategy bs;
     private Graphics g;
-
+    int x=0;
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -35,7 +35,7 @@ public class Game implements Runnable {
 
 
     public void tick() {
-
+        x += 1;
     }
 
 
@@ -48,7 +48,7 @@ public class Game implements Runnable {
         g = bs.getDrawGraphics();
         g.clearRect(0,0,width,height);
 
-        g.drawImage(Assets.heroLeft,0,0,null);
+        g.drawImage(Assets.heroLeft,x,0,null);
 
         bs.show();
         g.dispose();
@@ -57,9 +57,23 @@ public class Game implements Runnable {
 
     public void run() {
         init();
+
+        long oldTime = System.nanoTime();   /*!< Retine timpul in nanosecunde aferent frame-ului anterior.*/
+        long curentTime;                    /*!< Retine timpul curent de executie.*/
+
+        /// Apelul functiilor Update() & Draw() trebuie realizat la fiecare 16.7 ms
+        /// sau mai bine spus de 60 ori pe secunda.
+
+        final int framesPerSecond   = 60; /*!< Constanta intreaga initializata cu numarul de frame-uri pe secunda.*/
+        final double timeFrame      = 1000000000 / framesPerSecond; /*!< Durata unui frame in nanosecunde.*/
+
         while(running) {
-            tick();
-            render();
+            curentTime = System.nanoTime();
+            if ((curentTime - oldTime) > timeFrame) {
+                tick();
+                render();
+                oldTime = curentTime;
+            }
         }
         stop();
     }
