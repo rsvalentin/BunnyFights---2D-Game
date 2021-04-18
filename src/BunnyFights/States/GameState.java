@@ -2,6 +2,7 @@ package BunnyFights.States;
 
 import BunnyFights.Entities.Creatures.Player;
 import BunnyFights.Game;
+import BunnyFights.Tiles.Tile;
 import BunnyFights.gfx.Assets;
 
 import java.awt.*;
