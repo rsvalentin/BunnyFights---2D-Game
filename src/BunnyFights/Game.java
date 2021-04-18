@@ -6,6 +6,7 @@ import BunnyFights.States.GameState;
 import BunnyFights.States.MenuState;
 import BunnyFights.States.State;
 import BunnyFights.gfx.Assets;
+import BunnyFights.gfx.GameCamera;
 import BunnyFights.gfx.ImageLoader;
 import BunnyFights.gfx.SpriteSheet;
 
@@ -32,6 +33,9 @@ public class Game implements Runnable {
     // Input
     private KeyManager ketManager;
 
+    // Camera
+    private GameCamera gameCamera;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -43,6 +47,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(ketManager);
         Assets.init();
+
+        gameCamera = new GameCamera(this,0,0);
 
         gameState = new GameState(this);
         menuState = new MenuState(this);
@@ -104,6 +110,19 @@ public class Game implements Runnable {
     public KeyManager getKetManager() {
         return ketManager;
     }
+
+    public GameCamera getGameCamera() {
+        return gameCamera;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public synchronized void start() {
         if (running)
             return;
