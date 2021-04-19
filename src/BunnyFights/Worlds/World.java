@@ -1,6 +1,7 @@
 package BunnyFights.Worlds;
 
 import BunnyFights.Game;
+import BunnyFights.Handler;
 import BunnyFights.Tiles.Tile;
 import BunnyFights.Utils.Utils;
 
@@ -8,13 +9,13 @@ import java.awt.*;
 
 public class World {
 
-    private Game game;
+    private Handler handler;
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
 
-    public World(Game game, String path) {
-        this.game = game;
+    public World(Handler handler, String path) {
+        this.handler = handler;
         loadWorld(path);
     }
 
@@ -23,9 +24,15 @@ public class World {
     }
 
     public void render(Graphics g) {
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
-                getTile(x,y).render(g,(int)(x * Tile.TILEWIDTH - game.getGameCamera().getxOffset()),(int)(y * Tile.TILEHEIGHT - game.getGameCamera().getyOffset()));
+
+        int xStart =(int)Math.max(0,handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
+        int xEnd = (int)Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+        int yStart = (int)Math.max(0,handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
+        int yEnd = (int)Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+
+        for(int y = yStart; y < yEnd; y++) {
+            for(int x = xStart; x < xEnd; x++) {
+                getTile(x,y).render(g,(int)(x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),(int)(y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
     }

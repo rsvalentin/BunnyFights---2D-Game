@@ -1,6 +1,7 @@
 package BunnyFights.States;
 
 import BunnyFights.Game;
+import BunnyFights.Handler;
 
 import java.awt.*;
 
@@ -16,9 +17,9 @@ public abstract class State {
     }
 
     // CLASS
-    protected Game game;
-    public State(Game game) {
-        this.game = game;
+    protected Handler handler;
+    public State(Handler handler) {
+        this.handler = handler;
     }
     public abstract void tick();
     public abstract void render(Graphics g);
