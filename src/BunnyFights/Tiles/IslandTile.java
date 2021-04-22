@@ -10,4 +10,9 @@ public class IslandTile extends Tile {
     public IslandTile(int id) {
         super(Assets.island, id);
     }
+
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
 }
