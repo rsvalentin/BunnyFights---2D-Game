@@ -32,6 +32,7 @@ public class Player extends Creature {
         if(handler.getKeyManager().right == true) {
             image = Assets.heroRight;
         }
+
     }
 
     public void getInput() {
@@ -61,4 +62,5 @@ public class Player extends Creature {
         //       (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
          //       bounds.width, bounds.height);
     }
+
 }

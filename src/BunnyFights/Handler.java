@@ -1,5 +1,6 @@
 package BunnyFights;
 
+import BunnyFights.Entities.Creatures.Player;
 import BunnyFights.Input.KeyManager;
 import BunnyFights.Worlds.World;
 import BunnyFights.gfx.GameCamera;
@@ -44,4 +45,5 @@ public class Handler {
     public void setWorld(World world) {
         this.world = world;
     }
+
 }
