@@ -24,8 +24,9 @@ public class GameState extends State {
         player = new Player(handler,100,300);
         snake1 = new Snake(handler, 100, 200);
 
-        //ssnake1.setSpeed(10.0f);
-        snake1.moveToPlayer(player);
+        snake1.setSpeed(3.1f);
+        snake1.snakePlayerRelation(player);
+
 
 
 
@@ -35,8 +36,7 @@ public class GameState extends State {
     public void tick() {
         world.tick();
         player.tick();
-        snake1.tick();
-        snake1.moveToPlayer(player);
+        snake1.snakePlayerRelation(player);
 
 
     }
