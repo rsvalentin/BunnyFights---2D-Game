@@ -33,6 +33,10 @@ public abstract class Entity {
         this.x = x;
     }
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
     public float getY() {
         return y;
     }
@@ -56,4 +60,5 @@ public abstract class Entity {
     public void setHeight(int height) {
         this.height = height;
     }
+
 }

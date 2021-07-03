@@ -6,7 +6,7 @@ import BunnyFights.Handler;
 import java.awt.*;
 
 public abstract class State {
-
+    protected int score = 0;
     private static State currentState = null;
     public static void setState(State state) {
         currentState = state;

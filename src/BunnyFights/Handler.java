@@ -2,11 +2,13 @@ package BunnyFights;
 
 import BunnyFights.Entities.Creatures.Player;
 import BunnyFights.Input.KeyManager;
+import BunnyFights.Input.MouseManager;
 import BunnyFights.Worlds.World;
 import BunnyFights.gfx.GameCamera;
 
-public class Handler {
+import java.awt.event.MouseAdapter;
 
+public class Handler {
     private Game game;
     private World world;
 
@@ -19,8 +21,14 @@ public class Handler {
     }
 
     public KeyManager getKeyManager() {
-        return game.getKetManager();
+        return game.getKeyManager();
     }
+
+    public MouseManager getMouseManager() {
+        return game.getMouseManager();
+    }
+
+
 
     public int getWidth() {
         return game.getWidth();

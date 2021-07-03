@@ -9,8 +9,17 @@ public class Assets {
     public static BufferedImage snakeRight, snakeFace, snakeBack, snakeLeft;
     public static BufferedImage bearRight, bearFace, bearBack, bearLeft;
     public static BufferedImage foxRight, foxFace, foxBack, foxLeft;
+
+    public static BufferedImage[] btn_start;
+    public static BufferedImage[] btn_about;
     public static void init() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
+        btn_start = new BufferedImage[2];
+        btn_start[0] = sheet.crop(0,0, width, height);
+        btn_start[1] = sheet.crop(width,0, width, height);
+        btn_about = new BufferedImage[2];
+        btn_about[0] = sheet.crop(2 * width, height, width, height);
+        btn_about[1] = sheet.crop(3 * width,height, width, height);
         grass = sheet.crop(0,0, width, height);
         water = sheet.crop(width,0, width, height);
         tree = sheet.crop(2 * width, height, width, height);

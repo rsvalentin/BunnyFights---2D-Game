@@ -10,6 +10,7 @@ public class KeyManager implements KeyListener
     public boolean down;    /*!< Flag pentru tasta "jos" apasata.*/
     public boolean left;    /*!< Flag pentru tasta "stanga" apasata.*/
     public boolean right;   /*!< Flag pentru tasta "dreapta" apasata.*/
+    public boolean space;
 
 
     public KeyManager()
@@ -24,6 +25,7 @@ public class KeyManager implements KeyListener
         down  = keys[KeyEvent.VK_S];
         left  = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
+        space = keys[KeyEvent.VK_SPACE];
     }
 
     @Override

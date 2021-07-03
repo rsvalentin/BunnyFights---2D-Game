@@ -2,9 +2,8 @@ package BunnyFights;
 
 import BunnyFights.Display.Display;
 import BunnyFights.Input.KeyManager;
-import BunnyFights.States.GameState;
-import BunnyFights.States.MenuState;
-import BunnyFights.States.State;
+import BunnyFights.Input.MouseManager;
+import BunnyFights.States.*;
 import BunnyFights.gfx.Assets;
 import BunnyFights.gfx.GameCamera;
 import BunnyFights.gfx.ImageLoader;
@@ -27,11 +26,14 @@ public class Game implements Runnable {
     private Graphics g;
 
     // States
-    private State gameState;
-    private State menuState;
+    public State gameState;
+    public State menuState;
+    public State aboutState;
+    public State winState;
 
     // Input
-    private KeyManager ketManager;
+    private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     // Camera
     private GameCamera gameCamera;
@@ -43,27 +45,35 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.title = title;
-        ketManager = new KeyManager();
+        keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
     public void init() {
 
         display = new Display(title, width, height);
-        display.getFrame().addKeyListener(ketManager);
+        display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
 
         handler = new Handler(this);
         gameCamera = new GameCamera(handler,0,0);
 
+        winState = new WinState(handler);
+        aboutState = new AboutState(handler);
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(gameState);
+
+        State.setState(menuState);
 
 
     }
 
 
     public void tick() {
-        ketManager.tick();
+        keyManager.tick();
         if (State.getState() != null) {
             State.getState().tick();
         }
@@ -111,8 +121,12 @@ public class Game implements Runnable {
         stop();
     }
 
-    public KeyManager getKetManager() {
-        return ketManager;
+    public KeyManager getKeyManager() {
+        return keyManager;
+    }
+
+    public MouseManager getMouseManager() {
+        return mouseManager;
     }
 
     public GameCamera getGameCamera() {

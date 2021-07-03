@@ -14,6 +14,7 @@ public abstract class Creature extends Entity {
     protected int health;
     protected float speed;
     protected float xMove, yMove;
+    public int count = 0;
 
     public Creature(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
@@ -111,6 +112,10 @@ public abstract class Creature extends Entity {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public int getCount() {
+        return count;
     }
 
 }
